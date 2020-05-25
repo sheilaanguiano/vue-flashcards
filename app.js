@@ -40,17 +40,27 @@ const cards = [
       cards: cards,
       newFront: '',
       newBack: '',
+      error: false
     },
     methods: {
       toggleCard: function(card){
         card.flipped = !card.flipped;
       },
       addNew: function(){
-        this.cards.push({
-          front: this.newFront,
-          back: this.newBack,
-          flipped: false,
-        });
+        if(!this.newFront || !this.newBack){
+          this.error = true;
+
+        } else {
+          this.cards.push({
+            front: this.newFront,
+            back: this.newBack,
+            flipped: false,
+          });
+          // This will make the fields go black after submitting information
+          this.newFront = '';
+          this.newBack = '';
+          this.error = false;
+        }
       }
 
     }
